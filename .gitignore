@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+runs/
+models/
+*.log
+案例5-自动图像描述/案例5-代码和数据/Flicker8k_Dataset/
+案例5-自动图像描述/案例5-代码和数据/Flickr8k_Dataset.zip
