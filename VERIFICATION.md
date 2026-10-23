@@ -40,3 +40,16 @@ $script = '.\案例5-自动图像描述\案例5-代码和数据\fullname_lab.py'
 ```
 
 独立预测可将任一本地 JPEG 路径传给 `predict --output runs/verify-efficientnet --image '图片路径'`；换成 DenseNet 的输出目录即可验证另一个模型。
+
+## 2026-10-23 提交前验证
+
+Windows CUDA 环境中，BLIP 与数据处理测试 14 项、CNN 对比契约测试 2 项通过。两套环境分别执行：
+
+```powershell
+.\.venv-blip\Scripts\python.exe -m unittest -v test_caption_data test_blip_amp test_blip_loss test_blip_training test_blip_tuning
+.\.venv-cnn-gpu\Scripts\python.exe -m unittest -v test_cnn_comparison
+```
+
+BLIP 测试覆盖图片隔离划分、padding、生成指标、损失与梯度累积等价、AMP 溢出恢复及调参流程。CNN 测试检查因果掩码、冻结主干和 padding 损失。CNN 环境的建立方法见 [统一实验](CNN_BLIP_COMPARISON.md)，不能在未安装 Keras 的 BLIP 环境中运行该组测试。
+
+当前部分测试是本地集成检查：`test_blip_training` 需要 `models/blip-base-source-82a3776` 的 tokenizer 和 `models/nltk_data` 的 WordNet；`test_blip_tuning` 读取 `runs/blip-full-random80-20261022/config.json` 与 `runs/blip-training-preflight-20261022` 的审计产物。它们均未提交，刚克隆仓库时须按迁移文档恢复后再运行完整检查。仅数据处理、AMP 与损失测试可在装好依赖后独立运行。

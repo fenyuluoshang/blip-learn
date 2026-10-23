@@ -4,7 +4,21 @@
 
 两组基础模型全量训练已完成。迁移到另一台电脑请先阅读 [迁移与交接](MIGRATION.md)，实测结果见 [基础训练结果](BASELINE_RESULTS.md)，下一阶段见 [BLIP 研究计划](RESEARCH_PLAN.md)。
 
-## 使用方法
+Windows 原生 BLIP 的独立 PyTorch CUDA 环境与小范围验证命令见 [Windows BLIP 环境](WINDOWS_BLIP_SETUP.md)。以下 TensorFlow 命令仍适用于基础模型。
+
+2026-10-22 已在 Windows 主系统完成随机 80/20 划分的四组 BLIP 全量实验，共 31 轮训练。最佳学习率 `5e-6`、第 6 轮模型采用 beam=3，验证 CIDEr 为 1.0351、BLEU-4 为 0.3561；独立重载与导出推理通过。结果及模型使用见 [BLIP 优化结果](BLIP_OPTIMIZATION_RESULTS.md)，首组配置与恢复命令见 [BLIP 全量训练](BLIP_FULL_TRAINING.md)。
+
+持续调参与训练的搜索规则、自动衔接和最终模型验证流程见 [BLIP 参数优化](BLIP_TUNING.md)。
+
+为补齐引入 BLIP 前后的实际差距，本机已按原案例结构重训两种 CNN，并在同一 1,619 张验证图上统一生成评价。贪心 CIDEr：EfficientNetB0 0.4728、DenseNet121 0.4685、微调 BLIP 1.0135；BLEU-4 分别为 0.1783、0.1772、0.3477。协议与复现命令见 [CNN/BLIP 统一实验](CNN_BLIP_COMPARISON.md)，完整结果及限制见 [统一对比结果](CNN_BLIP_COMPARISON_RESULTS.md)。新实验保存在 `runs/cnn-blip-comparison-20261022/`，未覆盖历史模型。
+
+## 仓库与本地实验文件
+
+Git 保存实验源码、测试、依赖清单和 Markdown 实验记录。PPT、`deliverables/`、`.presentation-build/`、图表构建缓存、虚拟环境、`models/`、`runs/` 及图片数据均保留在本机，不提交。仅克隆仓库不能获得训练权重、完整逐图结果或演示稿；迁移时按 [迁移与交接](MIGRATION.md) 另行复制实验产物。
+
+本文中的 BLIP 优化结果采用原训练生成设置；[CNN/BLIP 统一对比](CNN_BLIP_COMPARISON_RESULTS.md) 将生成上限统一为 24 个本模型 token，beam=3 的 CIDEr/BLEU-4 为 1.0353/0.3565。两份记录对应不同生成设置，应分别引用。
+
+## 基础 TensorFlow 模型
 
 在项目根目录使用 Python 3.10–3.12。Windows 原生 TensorFlow 默认使用 CPU；GPU 训练建议使用 WSL2。
 

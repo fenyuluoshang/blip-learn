@@ -1,0 +1,10 @@
+# Install the CUDA wheels first, following WINDOWS_BLIP_SETUP.md.
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+transformers==4.57.6
+Pillow>=10.0.1,<13
+numpy>=1.26,<3
+safetensors>=0.4.3
+nltk==3.10.4
+rouge-score==0.1.2
+pycocoevalcap==1.2

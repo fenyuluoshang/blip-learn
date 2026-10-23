@@ -1,7 +1,16 @@
 __pycache__/
 .venv/
+.venv-blip/
+.venv-cnn-gpu/
 runs/
 models/
 *.log
+.chart-data-*/
+.presentation-build/
+deliverables/
+*.ppt
+*.pptx
+/deck-montage.webp
+/short-montage.webp
 案例5-自动图像描述/案例5-代码和数据/Flicker8k_Dataset/
 案例5-自动图像描述/案例5-代码和数据/Flickr8k_Dataset.zip

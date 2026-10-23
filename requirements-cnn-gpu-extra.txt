@@ -1,0 +1,11 @@
+# Install in .venv-cnn-gpu, which reads the pinned .venv-blip runtime via .pth.
+# requirements-blip-lock.txt records that shared PyTorch/CUDA/metric runtime.
+h5py==3.16.0
+keras==3.15.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+ml_dtypes==0.6.0
+namex==0.1.0
+optree==0.20.0
+Pygments==2.21.0
+rich==15.0.0
